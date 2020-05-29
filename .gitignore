@@ -56,6 +56,25 @@ coverage.xml
 *.pot
 
 # Django stuff:
+#Ignore thumbnails created by Windows
+Thumbs.db
+#Ignore files built by Visual Studio
+*.obj
+*.exe
+*.pdb
+*.user
+*.aps
+*.pch
+*.vspscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.tlb
+*.tlh
+*.bak
+*.cache
+*.ilk
 *.log
 local_settings.py
 db.sqlite3
@@ -113,17 +132,45 @@ venv.bak/
 # Spyder project settings
 .spyderproject
 .spyproject
+[Bb]in
+[Dd]ebug*/
+*.lib
+*.sbr
+obj/
+[Rr]elease*/
+_ReSharper*/
+[Tt]est[Rr]esult*
+.vs/
+#Nuget packages folder
+packages/
 
 # Rope project settings
 .ropeproject
+#ignore thumbnails created by windows
+Thumbs.db
+#Ignore files
+*.pyc
 
 # mkdocs documentation
 /site
+/.tox/
+/build/
+/dist/
+*/bin/
+*/.idea/*
+.idea/*
+*/.project
+*/.pydevproject
+.project
+.pydevproject
+/venv/
+/env/
 
 # mypy
 .mypy_cache/
 .dmypy.json
 dmypy.json
+**/*.egg-info/
 
 # Pyre type checker
 .pyre/

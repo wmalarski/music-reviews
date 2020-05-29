@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "music-review"
+version = "0.1.0"
+description = ""
+authors = ["Wojciech Malarski <w.malarski@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+strawberry-graphql = "^0.26.1"
+django = "^3.0.6"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+flake8 = "^3.8.2"
+pre-commit = "^2.4.0"
+black = "^19.10b0"
+mypy = "^0.770"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
