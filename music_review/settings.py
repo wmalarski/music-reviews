@@ -39,8 +39,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "strawberry.django",
-    "reviews",
+    "django_filters",
+    "graphene_django",
+    "music_review.reviews",
 ]
 
 MIDDLEWARE = [
@@ -116,3 +117,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = "/static/"
+
+GRAPHENE = {"SCHEMA": "music_review.graphql.api.schema"}

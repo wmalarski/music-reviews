@@ -8,8 +8,8 @@ class Performer(models.Model):
     """
 
     name = models.TextField()
-    logo_url = models.TextField()
-    description = models.TextField()
+    logo_url = models.TextField(null=True)
+    description = models.TextField(default="")
     created = models.DateTimeField(auto_created=True)
     last_updated = models.DateTimeField(auto_now=True)
 
@@ -22,8 +22,8 @@ class Album(models.Model):
     performer = models.ForeignKey(Performer, on_delete=models.CASCADE)
     title = models.TextField()
     year = models.IntegerField()
-    cover_url = models.TextField()
-    description = models.TextField()
+    cover_url = models.TextField(null=True)
+    description = models.TextField(default="")
     created = models.DateTimeField(auto_created=True)
     last_updated = models.DateTimeField(auto_now=True)
 
