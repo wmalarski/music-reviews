@@ -39,9 +39,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # local apps
+    "music_review.reviews",
+    # external apps
     "django_filters",
     "graphene_django",
-    "music_review.reviews",
 ]
 
 MIDDLEWARE = [
