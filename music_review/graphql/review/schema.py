@@ -14,3 +14,4 @@ class ReviewMutations(graphene.ObjectType):
 
 class ReviewQuery(graphene.ObjectType):
     review_set = DjangoFilterConnectionField(ReviewType, filterset_class=ReviewFilter)
+    review = graphene.relay.Node.Field(ReviewType)

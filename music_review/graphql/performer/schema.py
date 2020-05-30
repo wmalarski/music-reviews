@@ -16,3 +16,4 @@ class PerformerQuery(graphene.ObjectType):
     performer_set = DjangoFilterConnectionField(
         PerformerType, filterset_class=PerformerFilter
     )
+    performer = graphene.relay.Node.Field(PerformerType)

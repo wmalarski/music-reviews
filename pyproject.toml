@@ -12,7 +12,7 @@ graphene-django = "^2.10.1"
 graphene-federation = "^0.1.0"
 django-filter = "^2.2.0"
 python-dotenv = "~=0.9"
-python-jose = "~=3.0"
+django-graphql-jwt = "^0.3.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

@@ -14,3 +14,4 @@ class AlbumMutations(graphene.ObjectType):
 
 class AlbumQuery(graphene.ObjectType):
     album_set = DjangoFilterConnectionField(AlbumType, filterset_class=AlbumFilter)
+    album = graphene.relay.Node.Field(AlbumType)
