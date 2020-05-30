@@ -20,7 +20,9 @@ class CreateAlbum(graphene.relay.ClientIDMutation):
     @login_required
     def mutate_and_get_payload(cls, _, info, performer: str, **kwargs):
         performer = graphene.relay.Node.get_node_from_global_id(info, performer)
-        album = Album.objects.create(performer=performer, user=info.context.user, **kwargs, )
+        album = Album.objects.create(
+            performer=performer, user=info.context.user, **kwargs,
+        )
         return CreateAlbum(album=album)
 
 

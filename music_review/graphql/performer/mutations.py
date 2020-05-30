@@ -33,10 +33,14 @@ class CreatePerformer(graphene.relay.ClientIDMutation):
         name: str,
         logo_url: Optional[str] = None,
         description: Optional[str] = "",
-        albums: List[AlbumInputType] = (),
+        albums: Optional[List[AlbumInputType]] = None,
     ):
+        albums = albums or []
         performer = Performer.objects.create(
-            name=name, logo_url=logo_url, description=description, user=info.context.user
+            name=name,
+            logo_url=logo_url,
+            description=description,
+            user=info.context.user,
         )
         for album in albums:
             Album.objects.create(

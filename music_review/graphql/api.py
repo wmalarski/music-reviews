@@ -12,7 +12,11 @@ class Query(AlbumQuery, PerformerQuery, ReviewQuery, UserQuery, graphene.ObjectT
 
 
 class Mutation(
-    AlbumMutations, PerformerMutations, ReviewMutations, UserMutations, graphene.ObjectType
+    AlbumMutations,
+    PerformerMutations,
+    ReviewMutations,
+    UserMutations,
+    graphene.ObjectType,
 ):
     pass
 
