@@ -18,7 +18,7 @@ class CreateReview(graphene.relay.ClientIDMutation):
     @login_required
     def mutate_and_get_payload(cls, _, info, album: str, **kwargs):
         album = graphene.relay.Node.get_node_from_global_id(info, album)
-        review = Review.objects.create(album=album, user=info.context.user, **kwargs, )
+        review = Review.objects.create(album=album, user=info.context.user, **kwargs,)
         return CreateReview(review=review)
 
 
@@ -37,7 +37,8 @@ class UpdateReview(graphene.relay.ClientIDMutation):
         kwargs_cpy = kwargs.copy()
         review_instance = graphene.relay.Node.get_node_from_global_id(info, review_id)
         check_permissions(review_instance.user, info)
-        if album_id := kwargs_cpy.get("album"):
+        album_id = kwargs_cpy.get("album")
+        if album_id is not None:
             kwargs_cpy["album"] = graphene.relay.Node.get_node_from_global_id(
                 info, album_id
             )

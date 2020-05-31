@@ -43,7 +43,9 @@ class UpdateAlbum(graphene.relay.ClientIDMutation):
         kwargs_cpy = kwargs.copy()
         album_instance = graphene.relay.Node.get_node_from_global_id(info, album)
         check_permissions(album_instance.user, info)
-        if performer_id := kwargs_cpy.get("performer"):
+
+        performer_id = kwargs_cpy.get("performer")
+        if performer_id is not None:
             kwargs_cpy["performer"] = graphene.relay.Node.get_node_from_global_id(
                 info, performer_id
             )
