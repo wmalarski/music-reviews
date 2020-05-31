@@ -2,6 +2,7 @@ version: 2.1
 
 orbs:
   python: circleci/python@0.2.1
+  heroku: circleci/heroku@1.0.1
 
 jobs:
   build-and-test:
@@ -14,8 +15,17 @@ jobs:
       - run:
           command: python manage.py test
           name: Test
+  deploy:
+    executor: heroku/default
+    steps:
+      - checkout
+      - heroku/install
+      - heroku/deploy-via-git
 
 workflows:
   main:
     jobs:
       - build-and-test
+      - deploy:
+          requires:
+            - build-and-test
