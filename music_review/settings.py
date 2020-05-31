@@ -16,6 +16,7 @@ import os
 from typing import List
 
 from dotenv import load_dotenv, find_dotenv
+import django_heroku
 
 ENV_FILE = find_dotenv()
 if ENV_FILE:
@@ -129,3 +130,6 @@ GRAPHENE = {
     "SCHEMA": "music_review.graphql.api.schema",
     "MIDDLEWARE": ["graphql_jwt.middleware.JSONWebTokenMiddleware",],
 }
+
+# Configure Django App for Heroku.
+django_heroku.settings(locals())
