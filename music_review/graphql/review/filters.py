@@ -9,3 +9,11 @@ class ReviewFilter(django_filters.FilterSet):
     class Meta:
         model = Review
         fields = ["album", "user", "rating"]
+
+    order_by = django_filters.OrderingFilter(
+        fields=(
+            ("rating", "rating"),
+            ("created", "created"),
+            ("last_updated", "last_updated"),
+        )
+    )

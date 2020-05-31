@@ -9,3 +9,11 @@ class PerformerFilter(django_filters.FilterSet):
     class Meta:
         model = Performer
         fields = ["name"]
+
+    order_by = django_filters.OrderingFilter(
+        fields=(
+            ("name", "name"),
+            ("created", "created"),
+            ("last_updated", "last_updated"),
+        )
+    )
