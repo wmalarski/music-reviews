@@ -16,6 +16,7 @@ django-graphql-jwt = "^0.3.1"
 django-heroku = "^0.3.1"
 gunicorn = "^20.0.4"
 dj-database-url = "^0.5.0"
+django-cors-headers = "^3.3.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
