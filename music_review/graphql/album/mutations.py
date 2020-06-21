@@ -2,7 +2,7 @@ import graphene
 from graphql_jwt.decorators import login_required
 
 from .types import AlbumType
-from ..utils import check_permissions
+from ..utils import check_permissions, update_and_save
 from ...reviews.models import Album
 
 
@@ -49,9 +49,7 @@ class UpdateAlbum(graphene.relay.ClientIDMutation):
             kwargs_cpy["performer"] = graphene.relay.Node.get_node_from_global_id(
                 info, performer_id
             )
-        for key, value in kwargs_cpy.items():
-            setattr(album_instance, key, value)
-        album_instance.save()
+        update_and_save(album_instance, kwargs)
         return UpdateAlbum(album=album_instance)
 
 

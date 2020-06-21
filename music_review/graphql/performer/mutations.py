@@ -4,7 +4,7 @@ import graphene
 from graphql_jwt.decorators import login_required
 
 from .types import PerformerType
-from ..utils import check_permissions
+from ..utils import check_permissions, update_and_save
 from ...reviews.models import Performer, Album
 
 
@@ -71,9 +71,7 @@ class UpdatePerformer(graphene.relay.ClientIDMutation):
             info, performer
         )
         check_permissions(performer_instance.user, info)
-        for key, value in kwargs.items():
-            setattr(performer_instance, key, value)
-        performer_instance.save()
+        update_and_save(performer_instance, kwargs)
         return UpdatePerformer(performer=performer_instance)
 
 

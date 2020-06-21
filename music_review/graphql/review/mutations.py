@@ -2,7 +2,7 @@ import graphene
 from graphql_jwt.decorators import login_required
 
 from .types import ReviewType
-from ..utils import check_permissions
+from ..utils import check_permissions, update_and_save
 from ...reviews.models import Review
 
 
@@ -42,9 +42,7 @@ class UpdateReview(graphene.relay.ClientIDMutation):
             kwargs_cpy["album"] = graphene.relay.Node.get_node_from_global_id(
                 info, album_id
             )
-        for key, value in kwargs_cpy.items():
-            setattr(review_instance, key, value)
-        review_instance.save()
+        update_and_save(review_instance, kwargs)
         return UpdateReview(review=review_instance)
 
 
