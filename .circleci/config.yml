@@ -8,15 +8,12 @@ jobs:
   build-and-test:
     executor: python/default
     environment:
-      DJANGO_ENV: development
+      DJANGO_ENV: production
     steps:
       - checkout
       - python/load-cache
       - python/install-deps
       - python/save-cache
-      - run:
-          command: python manage.py migrate
-          name: Migrate
       - run:
           command: python manage.py test
           name: Test

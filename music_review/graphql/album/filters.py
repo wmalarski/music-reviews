@@ -7,7 +7,7 @@ from ...reviews.models import Album, Review
 
 class AlbumFilter(django_filters.FilterSet):
     performer__name = django_filters.CharFilter(lookup_expr="icontains")
-    title = django_filters.CharFilter(lookup_expr="icontains")
+    name = django_filters.CharFilter(lookup_expr="icontains")
 
     class Meta:
         model = Album
@@ -15,7 +15,6 @@ class AlbumFilter(django_filters.FilterSet):
 
     order_by = django_filters.OrderingFilter(
         fields=(
-            ("title", "title"),
             ("year", "year"),
             ("created", "created"),
             ("last_updated", "last_updated"),

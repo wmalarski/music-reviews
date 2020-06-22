@@ -2,35 +2,41 @@ from django.contrib.auth import get_user_model
 from django.db import models
 
 
-class Performer(models.Model):
+class DateFieldsModel(models.Model):
+    """
+
+    """
+
+    class Meta:
+        abstract = True
+
+    created = models.DateTimeField(auto_now_add=True)
+    last_updated = models.DateTimeField(auto_now=True)
+
+
+class Performer(DateFieldsModel):
     """
 
     """
 
     name = models.TextField()
-    logo_url = models.TextField(null=True)
-    description = models.TextField(default="")
-    created = models.DateTimeField(auto_now_add=True)
-    last_updated = models.DateTimeField(auto_now=True)
+    mbid = models.TextField(unique=True)
     user = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, null=True)
 
 
-class Album(models.Model):
+class Album(DateFieldsModel):
     """
 
     """
 
+    mbid = models.TextField(unique=True)
     performer = models.ForeignKey(Performer, on_delete=models.CASCADE)
-    title = models.TextField()
+    name = models.TextField()
     year = models.IntegerField()
-    cover_url = models.TextField(null=True)
-    description = models.TextField(default="")
-    created = models.DateTimeField(auto_now_add=True)
-    last_updated = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, null=True)
 
 
-class Review(models.Model):
+class Review(DateFieldsModel):
     """
 
     """
@@ -39,5 +45,3 @@ class Review(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     review = models.TextField()
     rating = models.FloatField()
-    created = models.DateTimeField(auto_now_add=True)
-    last_updated = models.DateTimeField(auto_now=True)

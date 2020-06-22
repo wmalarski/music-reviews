@@ -1,3 +1,5 @@
+from typing import Dict, Any
+
 import graphene
 from graphql_jwt.decorators import login_required
 
@@ -11,17 +13,16 @@ class CreateAlbum(graphene.relay.ClientIDMutation):
 
     class Input:
         performer = graphene.ID(required=True)
-        title = graphene.String(required=True)
+        mbid = graphene.String(required=True)
+        name = graphene.String(required=True)
         year = graphene.Int(required=True)
-        cover_url = graphene.String()
-        description = graphene.String(default="")
 
     @classmethod
     @login_required
-    def mutate_and_get_payload(cls, _, info, performer: str, **kwargs):
+    def mutate_and_get_payload(cls, _, info, performer: str, **kwargs: Dict[str, Any]):
         performer = graphene.relay.Node.get_node_from_global_id(info, performer)
         album = Album.objects.create(
-            performer=performer, user=info.context.user, **kwargs,
+            performer=performer, user=info.context.user, **kwargs
         )
         return CreateAlbum(album=album)
 
@@ -31,24 +32,15 @@ class UpdateAlbum(graphene.relay.ClientIDMutation):
 
     class Input:
         album = graphene.ID(required=True)
-        performer = graphene.ID()
-        title = graphene.String()
+        mbid = graphene.String()
+        name = graphene.String()
         year = graphene.Int()
-        cover_url = graphene.String()
-        description = graphene.String()
 
     @classmethod
     @login_required
-    def mutate_and_get_payload(cls, _, info, album: str, **kwargs):
-        kwargs_cpy = kwargs.copy()
+    def mutate_and_get_payload(cls, _, info, album: str, **kwargs: Dict[str, Any]):
         album_instance = graphene.relay.Node.get_node_from_global_id(info, album)
         check_permissions(album_instance.user, info)
-
-        performer_id = kwargs_cpy.get("performer")
-        if performer_id is not None:
-            kwargs_cpy["performer"] = graphene.relay.Node.get_node_from_global_id(
-                info, performer_id
-            )
         update_and_save(album_instance, kwargs)
         return UpdateAlbum(album=album_instance)
 

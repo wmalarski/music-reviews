@@ -9,19 +9,16 @@ from ...reviews.models import Performer, Album
 
 
 class AlbumInputType(graphene.InputObjectType):
-    title = graphene.String(required=True)
+    name = graphene.String(required=True)
     year = graphene.Int(required=True)
-    cover_url = graphene.String()
-    description = graphene.String()
 
 
 class CreatePerformer(graphene.relay.ClientIDMutation):
     performer = graphene.Field(PerformerType)
 
     class Input:
+        mbid = graphene.String(required=True)
         name = graphene.String(required=True)
-        logo_url = graphene.String()
-        description = graphene.String(default="")
         albums = graphene.List(graphene.NonNull(AlbumInputType), default=[])
 
     @classmethod
@@ -30,28 +27,21 @@ class CreatePerformer(graphene.relay.ClientIDMutation):
         cls,
         _,
         info,
+        mbid: str,
         name: str,
-        logo_url: Optional[str] = None,
-        description: Optional[str] = "",
         albums: Optional[List[AlbumInputType]] = None,
     ):
         albums = albums or []
         performer = Performer.objects.create(
-            name=name,
-            logo_url=logo_url,
-            description=description,
-            user=info.context.user,
+            mbid=mbid, name=name, user=info.context.user,
         )
         for album in albums:
             Album.objects.create(
                 performer=performer,
-                title=album.title,
+                name=album.name,
                 year=album.year,
-                cover_url=album.cover_url,
-                description=album.description,
                 user=info.context.user,
             )
-
         return CreatePerformer(performer=performer)
 
 
@@ -60,9 +50,8 @@ class UpdatePerformer(graphene.relay.ClientIDMutation):
 
     class Input:
         performer = graphene.ID(required=True)
+        mbid = graphene.String()
         name = graphene.String()
-        logo_url = graphene.String()
-        description = graphene.String()
 
     @classmethod
     @login_required
