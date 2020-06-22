@@ -68,7 +68,7 @@ class ReviewSuccessTests(JSONWebTokenTestCase):
         self.user = get_user_model().objects.create(username="test")
         self.performer = Performer.objects.create(name="John Lennon")
         self.album = Album.objects.create(
-            performer=self.performer, title="John Lennon Band", year=1970
+            performer=self.performer, name="John Lennon Band", year=1970
         )
         self.album_id = to_global_id("AlbumType", self.album.id)
         self.client.authenticate(self.user)

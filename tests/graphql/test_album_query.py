@@ -38,7 +38,7 @@ class RandomAlbumTests(JSONWebTokenTestCase):
         albums = []
         for a in range(20):
             album = Album.objects.create(
-                performer=performer, title=str(a), year=1970 - a
+                performer=performer, name=str(a), year=1970 - a, mbid=str(a)
             )
             albums.append(album)
 

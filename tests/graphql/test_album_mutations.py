@@ -8,15 +8,16 @@ CREATE_ALBUM = """
 mutation CreateAlbum($performer: ID!) {
   createAlbum(input: {
     performer: $performer
-    title: "Yoko Ono Band"
-    year: 1970
+    name: "Yoko Ono Band"
+    year: 1970,
+    mbid: "ds"
   }) {
     album {
       id
       performer {
         name
       }
-      title
+      name
       year
       user {
         username
@@ -32,7 +33,7 @@ query ReadAlbum($album: ID!) {
     performer {
       name
     }
-    title
+    name
     year
     user {
       username
@@ -42,13 +43,13 @@ query ReadAlbum($album: ID!) {
 """
 
 UPDATE_ALBUM = """
-mutation UpdateAlbum($album: ID!, $title: String) {
+mutation UpdateAlbum($album: ID!, $name: String) {
   updateAlbum(input: {
     album: $album
-    title: $title
+    name: $name
   }) {
     album {
-      title
+      name
     }
   }
 }"""
@@ -92,15 +93,15 @@ class AlbumSuccessTests(JSONWebTokenTestCase):
 
     def test_update_album(self):
         album_id = self.create_album()
-        new_title = "YOKO"
+        new_name = "YOKO"
         result = self.client.execute(
-            UPDATE_ALBUM, {"album": album_id, "title": new_title}
+            UPDATE_ALBUM, {"album": album_id, "name": new_name}
         )
         self.assertIsNone(result.errors)
-        self.assertEqual(result.data["updateAlbum"]["album"]["title"], new_title)
+        self.assertEqual(result.data["updateAlbum"]["album"]["name"], new_name)
         result = self.client.execute(READ_ALBUM, {"album": album_id})
         self.assertIsNone(result.errors)
-        self.assertEqual(result.data["album"]["title"], new_title)
+        self.assertEqual(result.data["album"]["name"], new_name)
 
     def test_delete_album(self):
         album_id = self.create_album()

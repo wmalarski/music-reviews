@@ -6,6 +6,7 @@ CREATE_PERFORMER = """
 mutation CreatePerformer {
   createPerformer(input: {
     name: "John Lennon",
+    mbid: "dsd"
   }) {
     performer {
       name
