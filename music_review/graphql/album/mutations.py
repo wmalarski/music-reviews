@@ -56,7 +56,9 @@ class DeleteAlbum(graphene.relay.ClientIDMutation):
     def mutate_and_get_payload(cls, _, info, album: str):
         album_instance = graphene.relay.Node.get_node_from_global_id(info, album)
         check_permissions(album_instance.user, info)
+
         if album_instance is None:
             return DeleteAlbum(success=False)
+
         album_instance.delete()
         return DeleteAlbum(success=True)
