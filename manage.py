@@ -18,7 +18,8 @@ def main():
     try:
         execute_from_command_line(sys.argv)
     except OperationalError as err:
-        print("OperationalError", err.args)
+        if err.args != ('near "SCHEMA": syntax error',):
+            raise err
 
 
 if __name__ == "__main__":

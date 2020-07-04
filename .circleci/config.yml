@@ -23,7 +23,9 @@ jobs:
       - checkout
       - heroku/install
       - heroku/deploy-via-git
-
+      - run:
+          command: heroku run python manage.py migrate
+          name: Migrate database
 workflows:
   main:
     jobs:
