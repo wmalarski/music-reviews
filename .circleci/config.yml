@@ -24,7 +24,7 @@ jobs:
       - heroku/install
       - heroku/deploy-via-git
       - run:
-          command: heroku run python manage.py migrate reviews
+          command: heroku run python manage.py migrate --app $HEROKU_APP_NAME
           name: Migrate database
 workflows:
   main:
