@@ -25,6 +25,8 @@ flake8 = "^3.8.2"
 pre-commit = "^2.4.0"
 black = "^19.10b0"
 mypy = "^0.770"
+sqlalchemy = "^1.3.18"
+requests = "^2.24.0"
 
 [build-system]
 requires = ["poetry>=0.12"]
