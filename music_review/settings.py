@@ -35,7 +35,9 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 DJANGO_ENV = os.environ.get("DJANGO_ENV")
 DEBUG = DJANGO_ENV == "development"
 
-ALLOWED_HOSTS: List[str] = []
+ALLOWED_HOSTS: List[str] = [] if DEBUG else os.environ.get("ALLOWED_HOSTS", "").split(
+    ","
+)
 
 # Application definition
 

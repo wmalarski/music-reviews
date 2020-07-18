@@ -11,6 +11,7 @@ from ...reviews.models import Performer, Album
 class AlbumInputType(graphene.InputObjectType):
     name = graphene.String(required=True)
     year = graphene.Int(required=True)
+    mbid = graphene.String(required=True)
 
 
 class CreatePerformer(graphene.relay.ClientIDMutation):
@@ -39,6 +40,7 @@ class CreatePerformer(graphene.relay.ClientIDMutation):
             Album.objects.create(
                 performer=performer,
                 name=album.name,
+                mbid=album.mbid,
                 year=album.year,
                 user=info.context.user,
             )

@@ -8,6 +8,8 @@ from ...reviews.models import Album, Review
 class AlbumFilter(django_filters.FilterSet):
     performer__name = django_filters.CharFilter(lookup_expr="icontains")
     name = django_filters.CharFilter(lookup_expr="icontains")
+    year__gt = django_filters.NumberFilter(field_name="year", lookup_expr="gt")
+    year__lt = django_filters.NumberFilter(field_name="year", lookup_expr="lt")
 
     class Meta:
         model = Album
@@ -23,6 +25,9 @@ class AlbumFilter(django_filters.FilterSet):
 
 
 class RandomAlbumFilter(django_filters.FilterSet):
+    year__gt = django_filters.NumberFilter(field_name="year", lookup_expr="gt")
+    year__lt = django_filters.NumberFilter(field_name="year", lookup_expr="lt")
+
     class Meta:
         model = Album
         fields = ["year"]
